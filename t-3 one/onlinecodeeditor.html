@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Online Code Editor</title>
+    <style>
+        /* Add your CSS styling here */
+        /* Example styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            display: flex;
+            height: 100vh;
+        }
+        .editor {
+            flex: 1;
+            padding: 10px;
+            background-color: #f1f1f1;
+        }
+        .preview {
+            flex: 1;
+            padding: 10px;
+            background-color: white;
+            border-left: 1px solid #ccc;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="editor" id="editor"></div>
+        <div class="preview" id="preview"></div>
+    </div>
+
+    <script>
+        // Create the Ace editor instance
+        var editor = ace.edit("editor");
+        editor.setTheme("ace/theme/monokai");
+        editor.getSession().setMode("ace/mode/html");
+
+        // Function to update the preview pane
+        function updatePreview() {
+            var preview = document.getElementById("preview");
+            var code = editor.getValue();
+            preview.innerHTML = code;
+        }
+
+        // Update the preview on initial load
+        updatePreview();
+
+        // Update the preview whenever the editor content changes
+        editor.getSession().on("change", function () {
+            updatePreview();
+        });
+    </script>
+
+    <!-- Include the Ace editor library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.12/ace.js" integrity="sha512-0x5f3qYZbz+b1/9xOqRM9uhNOfZC20Kxv6I6hYmBnE9brbsktsgInUbBEpMmjJrUEaX2rBE8MZ55tuXKTv7itQ==" crossorigin="anonymous"></script>
+</body>
+</html>
